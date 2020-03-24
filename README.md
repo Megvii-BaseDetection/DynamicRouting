@@ -1,6 +1,6 @@
 # DynamicRouting
 
-This project provides an implementation for "[Learning Dynamic Routing for Semantic Segmentation]()" (*CVPR2020 Oral*) on PyTorch.
+This project provides an implementation for "[Learning Dynamic Routing for Semantic Segmentation](https://arxiv.org/abs/2003.10401)" (*CVPR2020 Oral*) on PyTorch.
 For the reason that experiments in the paper were conducted using internal framework, this project reimplements them on *dl_lib* and reports detailed comparisons below. Some parts of code in *dl_lib* are based on [detectron2](https://github.com/facebookresearch/detectron2).
 
 ![introduce image](intro/introduce.png)
@@ -29,12 +29,12 @@ We use Cityscapes dataset for training and validation. Please refer to [`dataset
 - Cityscapes [Download](https://www.cityscapes-dataset.com/)
 
 ### Pretrained Model
-We give the ImageNet pretained model:
+We give ImageNet pretained models:
 - Layer16-Fix [GoogleDrive](https://drive.google.com/file/d/1WqVOZo8oelXTKlf0BDE3q2W-lyYm2G2U/view?usp=sharing)
 - Layer33-Fix [GoogleDrive](https://drive.google.com/file/d/1xktVvVsYSaDlb8yQcn0zAzx2ZMUhyD_K/view?usp=sharing)
 
 ### Training
-For example, if you want to train Dynamic Network with *Layer16* backbone:
+For example, if you want to train Dynamic Network with Layer16 backbone:
 - Train from scratch
     ```shell
     cd playground/Dynamic/Seg.Layer16
@@ -50,16 +50,16 @@ NOTE: Please set `FIX_SIZE_FOR_FLOPS` to `[768,768]` and `[1024,2048]` for train
 
 ### Evaluation
 You can evaluate the trained or downloaded model:
-- Evaluate trained model
+- Evaluate the trained model
     ```shell
     dl_test --num-gpus 8
     ```
-- Evaluate downloaded model:
+- Evaluate the downloaded model:
     ```shell
     dl_test --num-gpus 8 MODEL.WEIGHTS /path/to/your/save_dir/ckpt.pth 
     ```
 
-NOTE: If your mechine does not support such setting, please change settings in `config.py` to a suitable value. 
+NOTE: If your machine does not support such setting, please change settings in `config.py` to a suitable value. 
 
 ## Performance
 ### Cityscapes *val* set
