@@ -169,8 +169,13 @@ class SemSegDecoderHead(nn.Module):
         for _index in range(len(self.in_features)):
             out_index = len(self.in_features) - _index - 1
             out_feat = features[self.in_features[out_index]]
-            if out_index <= 2:
+
+            if isinstance(out_feat, float):
+                continue
+
+            if out_index <= 2 and pred is not None:
                 out_feat = pred + out_feat
+
             pred = self.layer_decoder_list[out_index](out_feat)
             if out_index > 0:
                 pred = F.interpolate(input=pred,

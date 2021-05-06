@@ -12,7 +12,7 @@ from dl_lib.utils.file_io import PathManager
 import cv2
 from dl_lib.data import DatasetCatalog, MetadataCatalog
 from dl_lib.utils.comm import all_gather, is_main_process, synchronize
-from datasets.cityscapes.cityscapesscripts.helpers.labels import trainId2label
+from cityscapesscripts.helpers.labels import trainId2label
 from .evaluator import DatasetEvaluator
 
 
@@ -160,6 +160,9 @@ class SemSegEvaluator(DatasetEvaluator):
 
         # add flops calculation
         if len(self._real_flops) > 0 and len(self._expt_flops) > 0:
+            self._real_flops = [x.item() for x in self._real_flops]
+            self._expt_flops = [x.item() for x in self._expt_flops]
+
             res["mean_real_flops"] = (sum(self._real_flops) / len(self._real_flops)) / 1e3
             res["max_real_flops"] = max(self._real_flops) / 1e3
             res["min_real_flops"] = min(self._real_flops) / 1e3
